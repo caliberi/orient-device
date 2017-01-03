@@ -1,4 +1,52 @@
+/*
+ *
+ *		Screen Orientation API (www.w3.org/TR/screen-orientation/) is pretty new: 31 Oct 2016
+ *			so first window.screen.orientation.type is used to detect orientation;
+ *				if it's not supported, then window.orientation.
+ *
+ */
+
 'use strict';
+
+// keys to prevent from taking effect
+// left: 37, up: 38, right: 39, down: 40,
+// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+  e = e || window.event;
+  if (e.preventDefault)
+      e.preventDefault();
+  e.returnValue = false;  
+}
+
+//	prevent default behaviour for scroll keys
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+//	function to call to disable scrolling
+function disableScroll() {
+  if (window.addEventListener) // older FF
+      window.addEventListener('DOMMouseScroll', preventDefault, false);
+  window.onwheel = preventDefault; // modern standard
+  window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+  window.ontouchmove  = preventDefault; // mobile
+  document.onkeydown  = preventDefaultForScrollKeys;
+}
+
+//	function for reenabling scrolling
+function enableScroll() {
+    if (window.removeEventListener)
+        window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    window.onmousewheel = document.onmousewheel = null; 
+    window.onwheel = null; 
+    window.ontouchmove = null;  
+    document.onkeydown = null;  
+}
 
 //	main app object
 var orient = {};
@@ -73,29 +121,35 @@ var deviceOrientationListener = function() {
 		//	check angle returned by window object against preferred orientation and change backdrop display accordingly
 		if (orientation === orient.preferredOrientation) {
 			orient.backdrop.style.display = 'none';
+			enableScroll();
 		} else {
 			orient.backdrop.style.display = 'block';
+			orient.backdrop.style.transform = 'translate(' + window.scrollX + 'px, ' + window.scrollY + 'px)';
+			disableScroll();
 		}
 	}, 300);
 };
 
-//	
+//	init function
 orient.init = function(preferredOrientation) {
-	//	backdrop DOM element
-	orient.backdrop = document.createElement('div');
-	orient.backdrop.id = 'orientBackdrop';
-	orient.backdrop.innerHTML = '<div id="backdropText">This site\'s been optimised for <span id="preferred"></span> view, please hold your device in that position to make the most of our design.</div>';
-	document.body.appendChild(orient.backdrop);
+	//	run only if device is mobile
+	if (/Mobi/.test(navigator.userAgent)) {
+		//	backdrop DOM element
+		orient.backdrop = document.createElement('div');
+		orient.backdrop.id = 'orientBackdrop';
+		orient.backdrop.innerHTML = '<div id="backdropText">This site\'s been optimised for <span id="preferred"></span> view, please hold your device in that position to make the most of our design.</div>';
+		document.body.appendChild(orient.backdrop);
 
-	//	set backdrop colour based on browser
-	var browser = checkBrowser();
-	orient.backdrop.style['background-color'] = 'rgba(' + orient.colors[browser] + ', 0.85)';
+		//	set backdrop colour based on browser
+		var browser = checkBrowser();
+		orient.backdrop.style['background-color'] = 'rgba(' + orient.colors[browser] + ', 0.85)';
 
-	//	set backdrop text based on passed preference of orientation
-	document.getElementById('preferred').innerHTML = preferredOrientation;
+		//	set backdrop text based on passed preference of orientation
+		document.getElementById('preferred').innerHTML = preferredOrientation;
 
-	//	add preferred orientation to main app object and check orientation
-	orient.preferredOrientation = preferredOrientation;
-	deviceOrientationListener();								//	checks if orientation is the preferred one
-	window.onorientationchange = deviceOrientationListener;		//	checks the same for each change in orientation~
+		//	add preferred orientation to main app object and check orientation
+		orient.preferredOrientation = preferredOrientation;
+		deviceOrientationListener();								//	checks if orientation is the preferred one
+		window.onorientationchange = deviceOrientationListener;		//	checks the same for each change in orientation~
+	}
 };
