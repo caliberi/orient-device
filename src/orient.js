@@ -60,7 +60,7 @@ orient.angles = {
 };
 
 //	colour codes for each browser
-orient.colors = {
+orient.colours = {
 	'IE' : '56, 88, 132',
 	'Edge' : '56, 88, 132',
 	'Firefox' : '163, 98, 35',
@@ -142,7 +142,7 @@ orient.init = function(preferredOrientation) {
 
 		//	set backdrop colour based on browser
 		var browser = checkBrowser();
-		orient.backdrop.style['background-color'] = 'rgba(' + orient.colors[browser] + ', 0.85)';
+		orient.backdrop.style['background-color'] = 'rgba(' + orient.colours[browser] + ', 0.85)';
 
 		//	set backdrop text based on passed preference of orientation
 		document.getElementById('preferred').innerHTML = preferredOrientation;
