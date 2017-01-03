@@ -1,0 +1,7 @@
+{
+  "name": "orient-device",
+  "private": true,
+  "version": "0.0.1",
+  "description": "device-orientation enforcement add-on",
+  "author": "Janos Nemeth"
+}
