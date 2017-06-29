@@ -53,6 +53,12 @@
         text: {
             error: '<p>Please Rotate your device back to to get better User Experience :)</p>',
             color: 'white'
+        },
+        onRotate: function() {
+          console.log('rotated');
+        },
+        onError: function() {
+          console.log('error - wrong rotation');
         }
     };
     OrientDevice.init(options);

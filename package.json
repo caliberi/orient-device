@@ -2,7 +2,7 @@
   "name": "orient-device",
   "title": "Orient Device Force",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "orientation device force plugin, in order to inform your mobile users that its not a preffered orientation",
   "keywords": [
     "orient",
@@ -27,6 +27,7 @@
     "babel-loader": "^7.1.0",
     "babel-preset-es2015": "^6.24.1",
     "gulp": "^3.9.1",
+    "gulp-util": "^3.0.8",
     "gulp-webpack": "^1.5.0",
     "webpack": "^3.0.0"
   }

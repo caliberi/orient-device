@@ -15,6 +15,7 @@ const helpers = new Helpers();
 
 // global config
 let orient = {};
+let options;
 let defaultOptions = {
   prefferedOrient: 'portrait',
   text: {
@@ -35,12 +36,14 @@ module.exports = {
   init: function(config) {
 
     // if no config object is passed
-    let options = typeof config === 'undefined' ? defaultOptions : config;
+    options = typeof config === 'undefined' ? defaultOptions : config;
 
     // start if some of the options are passed
     let preferredOrientation = typeof options.prefferedOrient === 'undefined' ? defaultOptions.prefferedOrient : config.prefferedOrient;
     let text_error = typeof options.text.error === 'undefined' ? defaultOptions.text.error : config.text.error;
     let text_color = typeof options.text.color === 'undefined' ? defaultOptions.text.color : config.text.color;
+
+
 
     //  run only if device is mobile
     if (/Mobi/.test(navigator.userAgent)) {
@@ -142,6 +145,10 @@ let deviceOrientationListener = function() {
       orientation = null;
     }
 
+    if(options.onRotate !== 'undefined' || typeof options.onRotate !== 'function') {
+      options.onRotate();
+    }
+
     //  check angle returned by window object against preferred orientation and change backdrop display accordingly
     if (orientation === orient.preferredOrientation) {
       orient.backdrop.style.display = 'none';
@@ -150,6 +157,11 @@ let deviceOrientationListener = function() {
       orient.backdrop.style.display = 'block';
       orient.backdrop.style.transform = 'translate(' + window.scrollX + 'px, ' + window.scrollY + 'px)';
       helpers.disableScroll();
+
+      // callbacks register
+      if(options.onError !== 'undefined' || typeof options.onError !== 'function') {
+        options.onError();
+      }
     }
   }, 300);
 };

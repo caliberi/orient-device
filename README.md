@@ -21,6 +21,12 @@ Add `orient.js` file to your project code and initialise it.
             text: {
                 error: '<p><strong>Whoops</strong> can you please rotate your device <br><em>:)</em></p>',
                 color: 'rgba(255, 255, 255, 1)'
+            },
+            onRotate: function() {
+              console.log('rotated');
+            },
+            onError: function() {
+              console.log('error - wrong orientation');
             }
         };
         OrientDevice.init(options);
@@ -70,3 +76,12 @@ Here is a list of options:
         </tr>
     </tbody>
 </table>
+
+---
+
+**Custom Callbacks**
+
+`onRotate` - fires when devices is rotated (also fires initially)
+
+`onError` - fires when devices is in the wrong orientation (fires initially if its in wrong orientation)
+
