@@ -2,11 +2,13 @@
   "name": "orient-device",
   "title": "Orient Device Force",
   "private": false,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "orientation device force plugin, in order to inform your mobile users that its not a preffered orientation",
   "keywords": [
-    "orient",
-    "device"
+    "orientation",
+    "device",
+    "javascript",
+    "detection"
   ],
   "author": {
     "name": "Caliber Interactive",

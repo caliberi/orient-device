@@ -66,7 +66,8 @@ Here is a list of options:
         </tr>
         <tr>
             <td>error</td>
-            <td><p><strong>Whoops</strong> can you please rotate your device back to <span id="preferred"></span><br><em>:)</em> (HTML)</p></td>
+            <td>&lt;p&gt;&lt;strong&gt;Whoops&lt;/strong&gt; can you please rotate your device back to &lt;span id="preferred"&gt;&lt;/span&gt; &lt;em&gt; :) &lt;/em&gt;&lt;/p&gt; <br> Yes, HTML.
+           </td>
             <td>If you want to dynamically pull value of your prefered orientation please include an element with an id="preferred" or it will throw a <code>Javascript</code> error</strong></td>
         </tr>
         <tr>
