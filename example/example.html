@@ -1,0 +1,61 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orient Example</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+  <style>
+    html,body {
+      height: 100%;
+      background: -webkit-radial-gradient(#5e5e5d,#242424);
+      background: radial-gradient(#5e5e5d,#242424);
+      font-family: 'Lato', sans-serif;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    .content {
+      padding: 20px;
+    }
+    h1 {
+      display: table;
+      font-size: 20px;
+      color: #fff;
+      padding-bottom: 10px;
+      padding-top: 20px;
+      border-bottom: 1px solid #fff;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <a href="https://caliberi.com">
+      <img src="https://caliberi.com/app/themes/caliber/dist/images/cal-logowhite.svg" target="_blank" width="160" alt="Caliber">
+    </a>
+    <h1>THE SMART ORGANIC MARKETING AGENCY</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum neque labore alias officiis, dolor magni accusamus voluptate, architecto dolorum obcaecati tempora dolorem eveniet perferendis, velit modi voluptatum. Eaque, magni consequatur.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et accusamus alias voluptatum amet, placeat optio provident iste animi sequi. Placeat cupiditate in, at officia autem, obcaecati voluptates quae consectetur quibusdam!</p>
+  </div>
+  <script type="text/javascript" id="orient" src="../dist/orient.js"></script>
+  <script>
+    var options = {
+        prefferedOrient: 'portrait',
+        backgroundColor: 'rgba(67, 99, 38, .96)',
+        text: {
+            error: '<p>Please Rotate your device back to to get better User Experience :)</p>',
+            color: 'white'
+        }
+    };
+    OrientDevice.init(options);
+  </script>
+</body>
+</html>
